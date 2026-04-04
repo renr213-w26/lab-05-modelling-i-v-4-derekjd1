@@ -1,6 +1,8 @@
 ---
 title: "Lab 5 - Modelling I"
 categories: "Lab"
+author: "Derek Dubrule"
+date: "04-04-2026"
 ---
 
 # Introduction
