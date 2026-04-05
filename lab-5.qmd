@@ -216,9 +216,30 @@ a.  Using mutate, create a new variable `transformed_parsim` that is calculated 
     `log()` in R represents the **nautral log**.
     :::
 
+```{r}
+parasites <- parasites |>
+  mutate(transformed_parism = log(parsim / (1-parsim)))
+
+```
+
+
 b.  Then, visualize the relationship between divergence_time and `transformed_parsim`. Add a regression line to your visualization.
 
-c.  Write a 1-2 sentence description of what you observe in the visualization.
+```{r}
+ggplot(parasites, aes(x = divergence_time, y = transformed_parism)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Transformed Parasite Similarity vs Divergence Time",
+    x = "Divergence Time (millions of years)",
+    y = "Transformed Parasite Similarity"
+  )
+```
+
+
+c.  Write a 1-2 sentence description of what you observe in the visualization.  
+
+The transformed plot shows a more linear negative relationshp, and unlike the original model, the response is no longer restricted between 0 and 1, making the linear model better in this scenario.
 
 ## Question 6
 
