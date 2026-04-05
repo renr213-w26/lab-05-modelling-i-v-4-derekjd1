@@ -283,7 +283,18 @@ You can calculate $R^2$ using the glance function. For example, you can calculat
 
 a.  Calculate and report $R^2$ for each model fit in the previous exercise.
 
-b.  To answer our question of interest, would it be useful to compare the $R^2$ in each model to choose the variable that is the strongest predictor of parasite similarity? Why or why not?
+```{r}
+summary(dt_model)$r.squared
+summary(dist_model)$r.squared
+summary(BM_model)$r.squared
+summary(prec_model)$r.squared
+
+```
+
+
+b.  To answer our question of interest, would it be useful to compare the $R^2$ in each model to choose the variable that is the strongest predictor of parasite similarity? Why or why not?  
+
+It is useful to compare $R^2$ because it represents how much of the variability in the transformed parasite similarity number is explained by each predictor. The predictor with the larger $R^2$ is the strongest individual predictor among the models considered.
 
 # Part 3 - GDP and life expectancy
 
