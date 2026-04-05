@@ -141,11 +141,35 @@ Let’s start by reading in the `parasites` data and examining the relationship 
 
 a.  Load the data and save the data frame as `parasites`.
 
-b.  Based on the goals of the analysis, what is the response variable?
+```{r}
+parasites <- read_csv("data/parasites.csv")
 
-c.  Visualize the relationship between the two variables.
+# View(parasites)
+glimpse(parasites)
+```
 
-d.  Use the visualization to describe the relationship between the two variables.
+
+b.  Based on the goals of the analysis, what is the response variable?  
+Answer:  
+The response variable is "parism". This is because we are looking for which factors predict parasite similarity between species.
+
+c.  Visualize the relationship between the two variables.  
+
+```{r}
+ggplot(
+  parasites, aes(x = divergence_time, y = parsim)
+) +
+  geom_point() +
+  labs(
+    title = "Parasite Similarity vs Divergence Time",
+    x = "Divergence Time (millions of years)",
+    y = "Parasite Similarity"
+  )
+```
+
+d.  Use the visualization to describe the relationship between the two variables.  
+Answer:  
+Based on the scatter plot, it suggest that a negative reationshp between divergence and parasite similarity. This means that species that diverge more recently tend to share more parasites. Then species with larger divergence times tend to have lower parasite similarity. The relationshp does not appear or be a perfect linear relationshipm and the response is between 0 and 1.  
 
 ## Question 4
 

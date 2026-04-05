@@ -354,10 +354,62 @@ The Slope I obtained: 0.0142428. For every one year increase in the mothers age 
 <h2 class="anchored" data-anchor-id="question-3">Question 3</h2>
 <p>Let’s start by reading in the <code>parasites</code> data and examining the relationship between <code>divergence_time</code> and <code>parsim</code>.</p>
 <ol type="a">
-<li><p>Load the data and save the data frame as <code>parasites</code>.</p></li>
-<li><p>Based on the goals of the analysis, what is the response variable?</p></li>
+<li>Load the data and save the data frame as <code>parasites</code>.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>parasites <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/parasites.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 595 Columns: 7
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): species1, species2
+dbl (5): divergence_time, distance, BMdiff, precdiff, parsim
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View(parasites)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(parasites)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 595
+Columns: 7
+$ species1        &lt;chr&gt; "Alouatta_caraya", "Alouatta_caraya", "Alouatta_caraya…
+$ species2        &lt;chr&gt; "Alouatta_guariba", "Alouatta_palliata", "Alouatta_sen…
+$ divergence_time &lt;dbl&gt; 4.569, 3.888, 2.886, 21.321, 14.760, 14.760, 21.321, 2…
+$ distance        &lt;dbl&gt; 932.2, 3455.9, 1908.1, 1496.8, 3785.2, 1421.6, 1739.3,…
+$ BMdiff          &lt;dbl&gt; 388.63, 1000.03, 821.35, 4664.56, 2005.44, 3120.29, 52…
+$ precdiff        &lt;dbl&gt; 57.512, 54.883, 9.534, 27.586, 54.884, 16.694, 3.370, …
+$ parsim          &lt;dbl&gt; 0.318, 0.226, 0.250, 0.154, 0.240, 0.214, 0.125, 0.290…</code></pre>
+</div>
+</div>
+<ol start="2" type="a">
+<li><p>Based on the goals of the analysis, what is the response variable?<br>
+Answer:<br>
+The response variable is “parism”. This is because we are looking for which factors predict parasite similarity between species.</p></li>
 <li><p>Visualize the relationship between the two variables.</p></li>
-<li><p>Use the visualization to describe the relationship between the two variables.</p></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  parasites, <span class="fu">aes</span>(<span class="at">x =</span> divergence_time, <span class="at">y =</span> parsim)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Parasite Similarity vs Divergence Time"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Divergence Time (millions of years)"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Parasite Similarity"</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab-5_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="4" type="a">
+<li>Use the visualization to describe the relationship between the two variables.<br>
+Answer:<br>
+Based on the scatter plot, it suggest that a negative reationshp between divergence and parasite similarity. This means that species that diverge more recently tend to share more parasites. Then species with larger divergence times tend to have lower parasite similarity. The relationshp does not appear or be a perfect linear relationshipm and the response is between 0 and 1.</li>
 </ol>
 </section>
 <section id="question-4" class="level2">
