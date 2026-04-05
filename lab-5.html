@@ -210,8 +210,10 @@ Important
 Loading required package: cherryblossom
 Loading required package: usdata</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>births14_habitgiven <span class="ot">&lt;-</span> births14 <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(habit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View(births14)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>births14_habitgiven <span class="ot">&lt;-</span> births14 <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(habit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="2" type="a">
 <li>Plotting the data is a useful first step because it helps us quickly visualize trends, identify strong associations, and develop research questions. Create an appropriate plot displaying the relationship between <code>weight</code> and <code>habit</code>. In 2-3 sentences, discuss the relationships observed.</li>
@@ -233,7 +235,8 @@ Loading required package: usdata</code></pre>
 </div>
 </div>
 </div>
-<p>Interpretation: From the box plot it looks like Babies born to non-smoking mothers tend to have higher birth weights when compared to the babies that are born with a mother that smokes. The median birth weight is lower for smokers, also there seems to be more variability in that group. This could suggest that there is a negative relationship between smoking during pregnancy and birth weight.</p>
+<p>Interpretation:<br>
+From the box plot it looks like Babies born to non-smoking mothers tend to have higher birth weights when compared to the babies that are born with a mother that smokes. The median birth weight is lower for smokers, also there seems to be more variability in that group. This could suggest that there is a negative relationship between smoking during pregnancy and birth weight.</p>
 <ol start="3" type="a">
 <li>Now, fit a linear model that predicts <code>weight</code> from <code>habit</code>. Provide the tidy summary output below.</li>
 </ol>
@@ -278,17 +281,57 @@ Tip
 </div>
 </div></li>
 </ol>
-<p>Answer: <span class="math display">\[
+<p>Answer:<br>
+<span class="math display">\[
 \widehat{weight} = b_0 + b_1 \cdot I(\text{habit} = \text{smoker})
 \]</span></p>
 </section>
 <section id="question-2" class="level2">
 <h2 class="anchored" data-anchor-id="question-2">Question 2</h2>
 <ol type="a">
-<li><p>Another researcher is interested in assessing the relationship between babies’ weights and mothers’ ages. Fit another linear model to investigate this relationship. Provide the summary output below.</p></li>
-<li><p>In 2-3 sentences, explain how the regression line to model these data is fit, i.e., based on what criteria R determines the regression line.</p></li>
-<li><p>Interpret the intercept in the context of the data and the research question. Is the intercept meaningful in this context? Why or why not?</p></li>
-<li><p>Interpret the slope in the context of the data and the research question.</p></li>
+<li>Another researcher is interested in assessing the relationship between babies’ weights and mothers’ ages. Fit another linear model to investigate this relationship. Provide the summary output below.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(weight <span class="sc">~</span> mage, <span class="at">data =</span> births14)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = weight ~ mage, data = births14)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-6.4560 -0.6481  0.1232  0.8273  3.3855 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 6.792967   0.208045  32.651   &lt;2e-16 ***
+mage        0.014243   0.007168   1.987   0.0472 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 1.305 on 998 degrees of freedom
+Multiple R-squared:  0.003941,  Adjusted R-squared:  0.002943 
+F-statistic: 3.949 on 1 and 998 DF,  p-value: 0.04718</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Intercept and Slope</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(model2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)        mage 
+  6.7929667   0.0142428 </code></pre>
+</div>
+</div>
+<ol start="2" type="a">
+<li><p>In 2-3 sentences, explain how the regression line to model these data is fit, i.e., based on what criteria R determines the regression line.<br>
+Answer:<br>
+The regression line is fit using the least squares method. This means that R chooses the line that minimizes the sum of squared residuals, where each residual is the difference between the observed birth weight and the predicted birth weight.</p></li>
+<li><p>Interpret the intercept in the context of the data and the research question. Is the intercept meaningful in this context? Why or why not?<br>
+Answer:<br>
+The intercept I obtained:6.7929667. THe intercept represents the predicted birth weight when the mothers age is 0 years old which is around 6.7929667 pounds. This does not make sense in the real world as a mother cannot be 0 years in age and thus this is the value outside the range of the observed data.</p></li>
+<li><p>Interpret the slope in the context of the data and the research question.<br>
+Answer:<br>
+The Slope I obtained: 0.0142428. For every one year increase in the mothers age we expect the baby birth weight to be around 0.014 pounds higher on average.</p></li>
 </ol>
 </section>
 </section>

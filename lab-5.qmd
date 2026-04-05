@@ -40,6 +40,8 @@ a.  Create a version of the `births14` data set dropping observations where ther
 library(tidyverse)
 library(openintro)
 
+# View(births14)
+
 births14_habitgiven <- births14 |>
   drop_na(habit)
 ```
@@ -85,11 +87,29 @@ $$
 
 a.  Another researcher is interested in assessing the relationship between babies’ weights and mothers’ ages. Fit another linear model to investigate this relationship. Provide the summary output below.
 
-b.  In 2-3 sentences, explain how the regression line to model these data is fit, i.e., based on what criteria R determines the regression line.
+```{r}
+model2 <- lm(weight ~ mage, data = births14)
 
-c.  Interpret the intercept in the context of the data and the research question. Is the intercept meaningful in this context? Why or why not?
+summary(model2)
 
-d.  Interpret the slope in the context of the data and the research question.
+# Intercept and Slope
+coef(model2)
+```
+
+
+b.  In 2-3 sentences, explain how the regression line to model these data is fit, i.e., based on what criteria R determines the regression line.  
+Answer:  
+The regression line is fit using the least squares method. This means that R chooses the line that minimizes the sum of squared residuals, where each residual is the difference between the observed birth weight and the predicted birth weight.
+
+c.  Interpret the intercept in the context of the data and the research question. Is the intercept meaningful in this context? Why or why not?  
+Answer:  
+The intercept I obtained:6.7929667. 
+THe intercept represents the predicted birth weight when the mothers age is 0 years old which is around 6.7929667 pounds. This does not make sense in the real world as a mother cannot be 0 years in age and thus this is the value outside the range of the observed data.  
+
+d.  Interpret the slope in the context of the data and the research question.  
+Answer:  
+The Slope I obtained: 0.0142428. 
+For every one year increase in the mothers age we expect the baby birth weight to be around 0.014 pounds higher on average.  
 
 # Part 2 - Parasites
 
