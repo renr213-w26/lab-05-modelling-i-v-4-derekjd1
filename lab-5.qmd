@@ -218,7 +218,7 @@ a.  Using mutate, create a new variable `transformed_parsim` that is calculated 
 
 ```{r}
 parasites <- parasites |>
-  mutate(transformed_parism = log(parsim / (1-parsim)))
+  mutate(transformed_parsim = log(parsim / (1-parsim)))
 
 ```
 
@@ -226,7 +226,7 @@ parasites <- parasites |>
 b.  Then, visualize the relationship between divergence_time and `transformed_parsim`. Add a regression line to your visualization.
 
 ```{r}
-ggplot(parasites, aes(x = divergence_time, y = transformed_parism)) +
+ggplot(parasites, aes(x = divergence_time, y = transformed_parsim)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE) +
   labs(
@@ -239,7 +239,7 @@ ggplot(parasites, aes(x = divergence_time, y = transformed_parism)) +
 
 c.  Write a 1-2 sentence description of what you observe in the visualization.  
 
-The transformed plot shows a more linear negative relationshp, and unlike the original model, the response is no longer restricted between 0 and 1, making the linear model better in this scenario.
+The transformed plot shows a more linear negative relationship, and unlike the original model, the response is no longer restricted between 0 and 1, making the linear model better in this scenario.
 
 ## Question 6
 
@@ -257,7 +257,21 @@ To answer this question, begin by fitting a linear regression model to each pair
 
 a.  Report the slopes for each of these models. Use proper notation.
 
-b.  To answer the question of interest, would it be useful to compare the slopes in each model to choose the variable that is the strongest predictor of parasite similarity? Why or why not?
+```{r}
+dt_model <- lm(transformed_parsim ~ divergence_time, data = parasites)
+dist_model <- lm(transformed_parsim ~ distance, data = parasites)
+BM_model <- lm(transformed_parsim ~ BMdiff, data = parasites)
+prec_model <- lm(transformed_parsim ~ precdiff, data = parasites)
+
+coef(dt_model)[2]
+coef(dist_model)[2]
+coef(BM_model)[2]
+coef(prec_model)[2]
+```
+
+b.  To answer the question of interest, would it be useful to compare the slopes in each model to choose the variable that is the strongest predictor of parasite similarity? Why or why not?  
+
+It would not be useful by comparing the slopes directly because the predictors are measured in different units. For example, divergence time is measured in millions of years, distance is measured in km, and body mass index (bmi) is measured in grams (g), so the size of the slope can depend on the scale of the predictor.  
 
 ## Question 7
 
