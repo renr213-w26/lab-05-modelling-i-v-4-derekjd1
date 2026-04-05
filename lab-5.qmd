@@ -35,15 +35,51 @@ We are interested in the impact of smoking during pregnancy. Since it is not pos
 
 a.  Create a version of the `births14` data set dropping observations where there are `NA`s for `habit`. You can call this version `births14_habitgiven`.
 
+```{r}
+
+library(tidyverse)
+library(openintro)
+
+births14_habitgiven <- births14 |>
+  drop_na(habit)
+```
+
+
 b.  Plotting the data is a useful first step because it helps us quickly visualize trends, identify strong associations, and develop research questions. Create an appropriate plot displaying the relationship between `weight` and `habit`. In 2-3 sentences, discuss the relationships observed.
 
+```{r}
+ggplot(births14_habitgiven, aes(x = habit, y = weight)) +
+  geom_boxplot() +
+  labs(
+    title = "Birth Weight vs Smoking Habit",
+    x = "Smoking Habit",
+    y = "Birth Weight (grams)"
+  ) +
+  theme_minimal()
+```
+
+Interpretation:  
+From the box plot it looks like Babies born to non-smoking mothers tend to have higher birth weights when compared to the babies that are born with a mother that smokes. The median birth weight is lower for smokers, also there seems to be more variability in that group. This could suggest that there is a negative relationship between smoking during pregnancy and birth weight.
+
 c.  Now, fit a linear model that predicts `weight` from `habit`. Provide the tidy summary output below.
+
+```{r}
+model1 <- lm(weight ~ habit, data = births14_habitgiven)
+
+summary(model1)
+```
+
 
 d.  Write the estimated least squares regression line below using proper notation.
 
     ::: callout-tip
     If you need to type an equation using proper notation, type your answers in-between `$$` and `$$`. You may use `\hat{example}` to put a hat on a character.
     :::
+    
+Answer:  
+$$
+\widehat{weight} = b_0 + b_1 \cdot I(\text{habit} = \text{smoker})
+$$
 
 ## Question 2
 
