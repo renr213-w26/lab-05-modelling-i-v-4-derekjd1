@@ -78,7 +78,6 @@ d.  Write the estimated least squares regression line below using proper notatio
     If you need to type an equation using proper notation, type your answers in-between `$$` and `$$`. You may use `\hat{example}` to put a hat on a character.
     :::
     
-Answer:  
 $$
 \widehat{weight} = b_0 + b_1 \cdot I(\text{habit} = \text{smoker})
 $$
@@ -98,16 +97,16 @@ coef(model2)
 
 
 b.  In 2-3 sentences, explain how the regression line to model these data is fit, i.e., based on what criteria R determines the regression line.  
-Answer:  
+
 The regression line is fit using the least squares method. This means that R chooses the line that minimizes the sum of squared residuals, where each residual is the difference between the observed birth weight and the predicted birth weight.
 
 c.  Interpret the intercept in the context of the data and the research question. Is the intercept meaningful in this context? Why or why not?  
-Answer:  
+
 The intercept I obtained:6.7929667. 
 THe intercept represents the predicted birth weight when the mothers age is 0 years old which is around 6.7929667 pounds. This does not make sense in the real world as a mother cannot be 0 years in age and thus this is the value outside the range of the observed data.  
 
 d.  Interpret the slope in the context of the data and the research question.  
-Answer:  
+
 The Slope I obtained: 0.0142428. 
 For every one year increase in the mothers age we expect the baby birth weight to be around 0.014 pounds higher on average.  
 
@@ -150,7 +149,7 @@ glimpse(parasites)
 
 
 b.  Based on the goals of the analysis, what is the response variable?  
-Answer:  
+
 The response variable is "parism". This is because we are looking for which factors predict parasite similarity between species.
 
 c.  Visualize the relationship between the two variables.  
@@ -168,7 +167,7 @@ ggplot(
 ```
 
 d.  Use the visualization to describe the relationship between the two variables.  
-Answer:  
+
 Based on the scatter plot, it suggest that a negative reationshp between divergence and parasite similarity. This means that species that diverge more recently tend to share more parasites. Then species with larger divergence times tend to have lower parasite similarity. The relationshp does not appear or be a perfect linear relationshipm and the response is between 0 and 1.  
 
 ## Question 4
@@ -176,12 +175,36 @@ Based on the scatter plot, it suggest that a negative reationshp between diverge
 Next, model this relationship.
 
 a.  Fit the model and write the estimated regression equation.
+```{r}
+dt_model_raw <- lm(parsim ~ divergence_time, data = parasites)
 
-b.  Interpret the slope and the intercept in the context of the data.
+summary(dt_model_raw)
+coef(dt_model_raw)
+```
+
+
+b.  Interpret the slope and the intercept in the context of the data.  
+Answer:  
+The intercept of 0.379486678  means that when the divergence time is 0 million years, the predicted parasite similarity is around 0.379486678.  
+The slope: for every 1 million years of increasing divergent time, we expect parasite similarity to be lower by about 0.006531791.  
 
 c.  Recreate the visualization from Question 3, this time adding a regression line to the visualization.
+```{r}
+ggplot(
+  parasites, aes(x = divergence_time, y = parsim)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Parasite Similarity vs Divergence Time",
+    x = "Divergence Time (millions of years)",
+    y = "Parasite Similarity"
+  )
+```
 
-d.  What do you notice about the prediction (regression) line that may be strange, particularly for very large divergence times?
+
+d.  What do you notice about the prediction (regression) line that may be strange, particularly for very large divergence times?  
+
+For very large Divergent Times it seems to predict negative values of parasite similarity. This does not seem practical because parasite similarity is a proportion and should be between 0 and 1.
 
 ## Question 5
 

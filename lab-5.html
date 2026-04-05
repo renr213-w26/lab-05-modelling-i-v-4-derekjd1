@@ -281,8 +281,7 @@ Tip
 </div>
 </div></li>
 </ol>
-<p>Answer:<br>
-<span class="math display">\[
+<p><span class="math display">\[
 \widehat{weight} = b_0 + b_1 \cdot I(\text{habit} = \text{smoker})
 \]</span></p>
 </section>
@@ -323,16 +322,17 @@ F-statistic: 3.949 on 1 and 998 DF,  p-value: 0.04718</code></pre>
 </div>
 </div>
 <ol start="2" type="a">
-<li><p>In 2-3 sentences, explain how the regression line to model these data is fit, i.e., based on what criteria R determines the regression line.<br>
-Answer:<br>
-The regression line is fit using the least squares method. This means that R chooses the line that minimizes the sum of squared residuals, where each residual is the difference between the observed birth weight and the predicted birth weight.</p></li>
-<li><p>Interpret the intercept in the context of the data and the research question. Is the intercept meaningful in this context? Why or why not?<br>
-Answer:<br>
-The intercept I obtained:6.7929667. THe intercept represents the predicted birth weight when the mothers age is 0 years old which is around 6.7929667 pounds. This does not make sense in the real world as a mother cannot be 0 years in age and thus this is the value outside the range of the observed data.</p></li>
-<li><p>Interpret the slope in the context of the data and the research question.<br>
-Answer:<br>
-The Slope I obtained: 0.0142428. For every one year increase in the mothers age we expect the baby birth weight to be around 0.014 pounds higher on average.</p></li>
+<li>In 2-3 sentences, explain how the regression line to model these data is fit, i.e., based on what criteria R determines the regression line.</li>
 </ol>
+<p>The regression line is fit using the least squares method. This means that R chooses the line that minimizes the sum of squared residuals, where each residual is the difference between the observed birth weight and the predicted birth weight.</p>
+<ol start="3" type="a">
+<li>Interpret the intercept in the context of the data and the research question. Is the intercept meaningful in this context? Why or why not?</li>
+</ol>
+<p>The intercept I obtained:6.7929667. THe intercept represents the predicted birth weight when the mothers age is 0 years old which is around 6.7929667 pounds. This does not make sense in the real world as a mother cannot be 0 years in age and thus this is the value outside the range of the observed data.</p>
+<ol start="4" type="a">
+<li>Interpret the slope in the context of the data and the research question.</li>
+</ol>
+<p>The Slope I obtained: 0.0142428. For every one year increase in the mothers age we expect the baby birth weight to be around 0.014 pounds higher on average.</p>
 </section>
 </section>
 <section id="part-2---parasites" class="level1">
@@ -383,10 +383,11 @@ $ parsim          &lt;dbl&gt; 0.318, 0.226, 0.250, 0.154, 0.240, 0.214, 0.125, 0
 </div>
 </div>
 <ol start="2" type="a">
-<li><p>Based on the goals of the analysis, what is the response variable?<br>
-Answer:<br>
-The response variable is “parism”. This is because we are looking for which factors predict parasite similarity between species.</p></li>
-<li><p>Visualize the relationship between the two variables.</p></li>
+<li>Based on the goals of the analysis, what is the response variable?</li>
+</ol>
+<p>The response variable is “parism”. This is because we are looking for which factors predict parasite similarity between species.</p>
+<ol start="3" type="a">
+<li>Visualize the relationship between the two variables.</li>
 </ol>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
@@ -407,20 +408,78 @@ The response variable is “parism”. This is because we are looking for which 
 </div>
 </div>
 <ol start="4" type="a">
-<li>Use the visualization to describe the relationship between the two variables.<br>
-Answer:<br>
-Based on the scatter plot, it suggest that a negative reationshp between divergence and parasite similarity. This means that species that diverge more recently tend to share more parasites. Then species with larger divergence times tend to have lower parasite similarity. The relationshp does not appear or be a perfect linear relationshipm and the response is between 0 and 1.</li>
+<li>Use the visualization to describe the relationship between the two variables.</li>
 </ol>
+<p>Based on the scatter plot, it suggest that a negative reationshp between divergence and parasite similarity. This means that species that diverge more recently tend to share more parasites. Then species with larger divergence times tend to have lower parasite similarity. The relationshp does not appear or be a perfect linear relationshipm and the response is between 0 and 1.</p>
 </section>
 <section id="question-4" class="level2">
 <h2 class="anchored" data-anchor-id="question-4">Question 4</h2>
 <p>Next, model this relationship.</p>
 <ol type="a">
-<li><p>Fit the model and write the estimated regression equation.</p></li>
-<li><p>Interpret the slope and the intercept in the context of the data.</p></li>
-<li><p>Recreate the visualization from Question 3, this time adding a regression line to the visualization.</p></li>
-<li><p>What do you notice about the prediction (regression) line that may be strange, particularly for very large divergence times?</p></li>
+<li>Fit the model and write the estimated regression equation.</li>
 </ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dt_model_raw <span class="ot">&lt;-</span> <span class="fu">lm</span>(parsim <span class="sc">~</span> divergence_time, <span class="at">data =</span> parasites)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dt_model_raw)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = parsim ~ divergence_time, data = parasites)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.26605 -0.07272 -0.03772  0.03864  0.53636 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      0.379487   0.012097   31.37   &lt;2e-16 ***
+divergence_time -0.006532   0.000312  -20.94   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1327 on 593 degrees of freedom
+Multiple R-squared:  0.425, Adjusted R-squared:  0.4241 
+F-statistic: 438.4 on 1 and 593 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(dt_model_raw)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    (Intercept) divergence_time 
+    0.379486678    -0.006531791 </code></pre>
+</div>
+</div>
+<ol start="2" type="a">
+<li><p>Interpret the slope and the intercept in the context of the data.<br>
+Answer:<br>
+The intercept of 0.379486678 means that when the divergence time is 0 million years, the predicted parasite similarity is around 0.379486678.<br>
+The slope: for every 1 million years of increasing divergent time, we expect parasite similarity to be lower by about 0.006531791.</p></li>
+<li><p>Recreate the visualization from Question 3, this time adding a regression line to the visualization.</p></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  parasites, <span class="fu">aes</span>(<span class="at">x =</span> divergence_time, <span class="at">y =</span> parsim)) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Parasite Similarity vs Divergence Time"</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Divergence Time (millions of years)"</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Parasite Similarity"</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab-5_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="4" type="a">
+<li>What do you notice about the prediction (regression) line that may be strange, particularly for very large divergence times?</li>
+</ol>
+<p>For very large Divergent Times it seems to predict negative values of parasite similarity. This does not seem practical because parasite similarity is a proportion and should be between 0 and 1.</p>
 </section>
 <section id="question-5" class="level2">
 <h2 class="anchored" data-anchor-id="question-5">Question 5</h2>
