@@ -461,7 +461,9 @@ Then, write a paragraph (4-5 sentences) addressing the following:
 
 -   What are your general take-aways from this presentation?
 
--   What are your general take-aways from how this presentation was given?
+-   What are your general take-aways from how this presentation was given?  
+
+I liked how the presentation showed data moving over time instead of just using static graphs, this was a unique way to make it easier to understand. It was also interesting to see how the countries improved in both life expectancy and income over the years. Seeing the graphs improve I am now curious to see what the future holds and if this general trend will continue with more development within countries. Also if the Life expectancy and GDP will even out for countries over time or if the same countries with high statistics for each will remain on top. This is a good example of how high quality visuals and graphics can improve a message you are trying to display.  
 
 # Wrap-up
 
