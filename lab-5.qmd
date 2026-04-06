@@ -397,6 +397,24 @@ Next, we want to examine if the relationship between GDP and life expectancy tha
 
 a.  **Justification:** Create a scatter plot of `gdpPercap_log` vs. `lifeExp`, where the points are colored by `continent`. Do you think the trend between `gdpPercap_log` and `lifeExp` is different for different continents? Justify your answer with specific features of the plot.
 
+```{r}
+ggplot(
+  gapminder_07, 
+  aes(x = lifeExp, y = gdpPercap_log, color = continent)
+  )+
+  geom_point() +
+  labs(
+    title = "Log GDP per Capita vs Life Expectancy by Continent (2007)",
+    x = "Life Expectancy (years)",
+    y = "Log GDP per Capita",
+    color = "Continent"
+  )
+```
+
+Interpretation:  
+Th overall relationship between life expectancy and logged GDP per capita is positive across continents, but there appears to be a pattern that the same continents are similarly located / clustered. Europe (blue) tends to have a cluster of relatively high GDP and Life expectancy while Africa (orange) has relatively low GDP and Life Expectancy.  
+
+
 b.  **Model fitting and interpretation:**
 
     -   Regardless of your answer in part (a), fit an [additive model]{.underline} (main effects) that predicts `gdpPercap_log` from life expectancy and continent (with Africas as the baseline level). Display a tidy summary of the model output.
@@ -404,8 +422,30 @@ b.  **Model fitting and interpretation:**
     -   Interpret the *intercept* of the model, making sure that your interpretation is in the units of the original data (not on log scale).
 
     -   Interpret the *slope* of the model, making sure that your interpretation is in the units of the original data (not on log scale).
+    
+```{r}
+gapminder_07 <- gapminder_07 |>
+  mutate(continent = relevel(continent, ref = "Africa"))
 
-c.  **Prediction:** Predict the GDP of a country in Asia where the average life expectancy is 70 years old.
+model_cont <- lm(gdpPercap_log ~ lifeExp + continent, data = gapminder_07)
+
+summary(model_cont)
+coef(model_cont)
+```
+
+Intercept:  
+The intercept corresponds to Africa. e to the power of 3.20484795 gives 24.65. So after converting back to the original scale it gives a predicted GDP per capita of about $24.65 when life expectancy is 0 years. This is not meaningful since 0 years is unrealistic.  
+
+Slope:  
+For every 1 year increase in life expectancy, GDP per capita is expected to increase by about 8.1%. 
+
+c.  **Prediction:** Predict the GDP of a country in Asia where the average life expectancy is 70 years old.  
+
+The predicted GDP per capita for a country is Asia with a life expectancy of 70 years is around 5900$. 
+Life expectancy 70, the predicted logged GDP is:
+3.204848 + 0.078124(70) + 0.010290 = 5900
+
+Back-transforming to the original scale gives a predicted GDP per capita of about $5,907.
 
 ## Question 10
 
