@@ -224,7 +224,7 @@ Loading required package: usdata</code></pre>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Birth Weight vs Smoking Habit"</span>,</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Smoking Habit"</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Birth Weight (grams)"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Birth Weight (pounds)"</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -282,7 +282,7 @@ Tip
 </div></li>
 </ol>
 <p><span class="math display">\[
-\widehat{weight} = b_0 + b_1 \cdot I(\text{habit} = \text{smoker})
+\widehat{weight} = 7.26987 - 0.59268 \cdot I(\text{habit}=\text{smoker})
 \]</span></p>
 </section>
 <section id="question-2" class="level2">
@@ -385,7 +385,7 @@ $ parsim          &lt;dbl&gt; 0.318, 0.226, 0.250, 0.154, 0.240, 0.214, 0.125, 0
 <ol start="2" type="a">
 <li>Based on the goals of the analysis, what is the response variable?</li>
 </ol>
-<p>The response variable is “parism”. This is because we are looking for which factors predict parasite similarity between species.</p>
+<p>The response variable is “parsim”. This is because we are looking for which factors predict parasite similarity between species.</p>
 <ol start="3" type="a">
 <li>Visualize the relationship between the two variables.</li>
 </ol>
@@ -410,7 +410,7 @@ $ parsim          &lt;dbl&gt; 0.318, 0.226, 0.250, 0.154, 0.240, 0.214, 0.125, 0
 <ol start="4" type="a">
 <li>Use the visualization to describe the relationship between the two variables.</li>
 </ol>
-<p>Based on the scatter plot, it suggest that a negative reationshp between divergence and parasite similarity. This means that species that diverge more recently tend to share more parasites. Then species with larger divergence times tend to have lower parasite similarity. The relationshp does not appear or be a perfect linear relationshipm and the response is between 0 and 1.</p>
+<p>Based on the scatter plot, it suggest that a negative relationship between divergence and parasite similarity. This means that species that diverge more recently tend to share more parasites. Then species with larger divergence times tend to have lower parasite similarity. The relationship does not appear or be a perfect linear relationship and the response is between 0 and 1.</p>
 </section>
 <section id="question-4" class="level2">
 <h2 class="anchored" data-anchor-id="question-4">Question 4</h2>
@@ -452,7 +452,7 @@ F-statistic: 438.4 on 1 and 593 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li><p>Interpret the slope and the intercept in the context of the data.<br>
 Answer:<br>
 The intercept of 0.379486678 means that when the divergence time is 0 million years, the predicted parasite similarity is around 0.379486678.<br>
-The slope: for every 1 million years of increasing divergent time, we expect parasite similarity to be lower by about 0.006531791.</p></li>
+The slope: for every 1 million years of increasing divergence time, we expect parasite similarity to be lower by about 0.006531791.</p></li>
 <li><p>Recreate the visualization from Question 3, this time adding a regression line to the visualization.</p></li>
 </ol>
 <div class="cell">
@@ -575,7 +575,7 @@ Note
 <ol start="2" type="a">
 <li>To answer the question of interest, would it be useful to compare the slopes in each model to choose the variable that is the strongest predictor of parasite similarity? Why or why not?</li>
 </ol>
-<p>It would not be useful by comparing the slopes directly because the predictors are measured in different units. For example, divergence time is measured in millions of years, distance is measured in km, and body mass index (bmi) is measured in grams (g), so the size of the slope can depend on the scale of the predictor.</p>
+<p>It would not be useful by comparing the slopes directly because the predictors are measured in different units. For example, divergence time is measured in millions of years, distance is measured in km, and body mass difference (bmdiff) is measured in grams (g), so the size of the slope can depend on the scale of the predictor.</p>
 </section>
 <section id="question-7" class="level2">
 <h2 class="anchored" data-anchor-id="question-7">Question 7</h2>

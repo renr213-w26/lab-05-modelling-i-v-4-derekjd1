@@ -55,7 +55,7 @@ ggplot(births14_habitgiven, aes(x = habit, y = weight)) +
   labs(
     title = "Birth Weight vs Smoking Habit",
     x = "Smoking Habit",
-    y = "Birth Weight (grams)"
+    y = "Birth Weight (pounds)"
   ) +
   theme_minimal()
 ```
@@ -79,7 +79,7 @@ d.  Write the estimated least squares regression line below using proper notatio
     :::
     
 $$
-\widehat{weight} = b_0 + b_1 \cdot I(\text{habit} = \text{smoker})
+\widehat{weight} = 7.26987 - 0.59268 \cdot I(\text{habit}=\text{smoker})
 $$
 
 ## Question 2
@@ -150,7 +150,7 @@ glimpse(parasites)
 
 b.  Based on the goals of the analysis, what is the response variable?  
 
-The response variable is "parism". This is because we are looking for which factors predict parasite similarity between species.
+The response variable is "parsim". This is because we are looking for which factors predict parasite similarity between species.
 
 c.  Visualize the relationship between the two variables.  
 
@@ -168,7 +168,7 @@ ggplot(
 
 d.  Use the visualization to describe the relationship between the two variables.  
 
-Based on the scatter plot, it suggest that a negative reationshp between divergence and parasite similarity. This means that species that diverge more recently tend to share more parasites. Then species with larger divergence times tend to have lower parasite similarity. The relationshp does not appear or be a perfect linear relationshipm and the response is between 0 and 1.  
+Based on the scatter plot, it suggest that a negative relationship between divergence and parasite similarity. This means that species that diverge more recently tend to share more parasites. Then species with larger divergence times tend to have lower parasite similarity. The relationship does not appear or be a perfect linear relationship and the response is between 0 and 1.  
 
 ## Question 4
 
@@ -186,7 +186,7 @@ coef(dt_model_raw)
 b.  Interpret the slope and the intercept in the context of the data.  
 Answer:  
 The intercept of 0.379486678  means that when the divergence time is 0 million years, the predicted parasite similarity is around 0.379486678.  
-The slope: for every 1 million years of increasing divergent time, we expect parasite similarity to be lower by about 0.006531791.  
+The slope: for every 1 million years of increasing divergence time, we expect parasite similarity to be lower by about 0.006531791.  
 
 c.  Recreate the visualization from Question 3, this time adding a regression line to the visualization.
 ```{r}
@@ -271,7 +271,7 @@ coef(prec_model)[2]
 
 b.  To answer the question of interest, would it be useful to compare the slopes in each model to choose the variable that is the strongest predictor of parasite similarity? Why or why not?  
 
-It would not be useful by comparing the slopes directly because the predictors are measured in different units. For example, divergence time is measured in millions of years, distance is measured in km, and body mass index (bmi) is measured in grams (g), so the size of the slope can depend on the scale of the predictor.  
+It would not be useful by comparing the slopes directly because the predictors are measured in different units. For example, divergence time is measured in millions of years, distance is measured in km, and body mass difference (bmdiff) is measured in grams (g), so the size of the slope can depend on the scale of the predictor.  
 
 ## Question 7
 
