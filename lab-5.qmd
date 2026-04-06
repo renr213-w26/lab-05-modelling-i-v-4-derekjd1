@@ -316,6 +316,14 @@ Gapminder is a “fact tank” that uses publicly available world data to produc
 
 a.  **Data:** For our analysis, we will only be working with data from 2007. Below, filter the data set so only values from the year 2007 are shown. Save this data set as `gapminder_07` and use it for the remainder of this exercise and the following.
 
+```{r}
+library(gapminder)
+
+gapminder_07 <- gapminder |>
+  filter(year == 2007)
+```
+
+
 b.  **Visualization:** We are interested in learning more about GDP, and we’ll start with exploring the relationship between life expectancy and GDP. Create two visualizations:
 
     -   Scatter plot of `gdpPercap` vs. `lifeExp`.
@@ -323,16 +331,65 @@ b.  **Visualization:** We are interested in learning more about GDP, and we’ll
     -   Scatter plot of `gdpPercap_log` vs. `lifeExp`, where `gdpPercap_log` is a new variable you add to the data set by taking the natural log of `gdpPercap`.
 
     First describe the relationship between each pair of the variables. Then, comment on which relationship would be better modeled using a linear model, and explain your reasoning.
+    
+```{r}
+gapminder_07 <- gapminder_07 |>
+  mutate(gdpPercap_log = log(gdpPercap))
+
+
+# Scatter plot number 1
+ggplot(gapminder_07, aes(x = lifeExp, y = gdpPercap)) +
+  geom_point() +
+  labs(
+    title = "GDP per Capita vs Life Expectancy (2007)",
+    x = "Life Expectancy (years)",
+    y = "GDP per Capita"
+  )
+
+# Scatter plot number 2
+ggplot(gapminder_07, aes(x = lifeExp, y = gdpPercap_log)) +
+  geom_point() +
+  labs(
+    title = "Log GDP per Capita vs Life Expectancy (2007)",
+    x = "Life Expectancy (years)",
+    y = "Log GDP per Capita"
+  )
+```
+
+Answer fore 8b:  
+The scatter plot of GDP per capita versus life expectancy shows a positive relationship. Although for the most part it seems like a positive relationship it only seems to increase near the end of the Life Expectancy years (70+). From ages 40-70 its linear then increases rapidly from ages 70 and beyond.  
+
+The Log GDP per Capita vs Life Expectancy has a better linear positive relationship without the drastic change at 70 years. There is a more consistent trend upwards.  
 
 c.  **Model fitting:**
 
     -   Fit a linear model predicting log gross domestic product from life expectancy. Display the tidy summary.
+    
+```{r}
+model_gdp <- lm(gdpPercap_log ~ lifeExp, data = gapminder_07)
+
+summary(model_gdp)
+coef(model_gdp)
+```
+
 
 d.  **Model evaluation:**
 
     -   Calculate the R-squared of the model using two methods and confirm that the values match: first method is using `glance()` and the other method is based on the value of the correlation coefficient between the two variables.
 
     -   Interpret R-squared in the context of the data and the research question.
+    
+```{r}
+# Method 1: From the model summary
+summary(model_gdp)$r.squared
+
+# Method 2: From the correlation
+cor(gapminder_07$lifeExp, gapminder_07$gdpPercap_log)^2
+```
+
+Interpretation:  
+$R^2$ shows the proportion of variability in logged GDP per capita that is explained by life expectancy in this linear model. $R^2$ = 0.654449 ~ 0.66, about 66% of the variation in logged GDP per capita across countries in 2007 is explained by differences in life expectnacy.  
+
 
 ## Question 9
 
